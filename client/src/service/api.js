@@ -28,19 +28,13 @@ axiosInstance.interceptors.request.use(
 
 axiosInstance.interceptors.response.use(
     function(response) {
-        // Stop global loader here
         return processResponse(response);
     },
     function(error) {
-        // Stop global loader here
         return Promise.reject(ProcessError(error));
     }
 )
 
-///////////////////////////////
-// If success -> returns { isSuccess: true, data: object }
-// If fail -> returns { isFailure: true, status: string, msg: string, code: int }
-//////////////////////////////
 const processResponse = (response) => {
     if (response?.status === 200) {
         return { isSuccess: true, data: response.data }
